@@ -37,20 +37,15 @@
 {
     [super layoutSubviews];
     
-    self.titleLabel.frame = CGRectMake(EdgeMarin, EdgeMarin, self.frame.size.width - 2*EdgeMarin, TitleHeight);
+    self.titleLabel.frame = CGRectMake(EdgeMarin, EdgeMarin, ScreenWidth - 2*EdgeMarin, TitleHeight);
     
     //set margin of textview
-    self.textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.textView.textContainerInset = UIEdgeInsetsMake(EdgeMarin, EdgeMarin, EdgeMarin, EdgeMarin);
     self.textView.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1/1.0];
     
     CGFloat newHeight = [SelwynFormTextViewInputTableViewCell cellHeightWithItem:_formItem];
     
-    if (newHeight == _lastCellHeight) {
-        return;
-    }
-    _lastCellHeight = newHeight;
-    
-    self.textView.frame = CGRectMake(EdgeMarin, CGRectGetMaxY(self.titleLabel.frame) + EdgeMarin, self.frame.size.width - 2*EdgeMarin, MAX(146, newHeight - 54));
+    self.textView.frame = CGRectMake(EdgeMarin, CGRectGetMaxY(self.titleLabel.frame) + EdgeMarin, ScreenWidth - 2*EdgeMarin, MAX(DefaultTextViewHeight - 3*EdgeMarin - TitleHeight, newHeight - TitleHeight - 3*EdgeMarin));
 }
 
 #pragma mark - Text View Delegate
@@ -116,9 +111,9 @@
 #pragma mark -- cell height
 + (CGFloat)cellHeightWithItem:(SelwynFormItem *)item{
     
-    CGSize detailSize = [SelwynFormHandle getSizeWithString:item.formDetail Font:Font(TitleFont) maxSize:CGSizeMake(ScreenWidth - 2*EdgeMarin - 20, MAXFLOAT)];
+    CGSize detailSize = [SelwynFormHandle getSizeWithString:item.formDetail Font:Font(TitleFont) maxSize:CGSizeMake(ScreenWidth - 4*EdgeMarin, MAXFLOAT)];
     
-    return MAX(200, detailSize.height + 74);
+    return MAX(DefaultTextViewHeight, detailSize.height + TitleHeight + 5*EdgeMarin);
 }
 
 

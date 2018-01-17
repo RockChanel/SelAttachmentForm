@@ -42,12 +42,7 @@
     
     CGFloat newHeight = [SelwynFormInputTableViewCell cellHeightWithItem:_formItem];
     
-    if (newHeight == _lastCellHeight) {
-        return;
-    }
-    _lastCellHeight = newHeight;
-    
-    self.textView.frame = CGRectMake(TitleWidth + 2*EdgeMarin, EdgeMarin, ScreenWidth - (TitleWidth + 3*EdgeMarin), MAX(TitleHeight, newHeight - 2*EdgeMarin));
+     self.textView.frame = CGRectMake(TitleWidth + 2*EdgeMarin, EdgeMarin, ScreenWidth - (TitleWidth + 3*EdgeMarin), MAX(TitleHeight, newHeight - 2*EdgeMarin));
 }
 
 #pragma mark -- cell height
@@ -55,7 +50,7 @@
 {
     CGSize detailSize = [SelwynFormHandle getSizeWithString:item.formDetail Font:Font(TitleFont) maxSize:CGSizeMake(ScreenWidth - (TitleWidth + 3*EdgeMarin), MAXFLOAT)];
     
-    return MAX(44,detailSize.height + 2*EdgeMarin);
+    return MAX(TitleHeight+2*EdgeMarin ,detailSize.height + 2*EdgeMarin);
 }
 
 #pragma mark -- textViewdelegate

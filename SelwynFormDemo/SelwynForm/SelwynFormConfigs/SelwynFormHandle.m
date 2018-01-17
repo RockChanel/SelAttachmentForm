@@ -12,6 +12,7 @@ CGFloat const EdgeMarin = 10.0f;
 CGFloat const TitleWidth = 100.0f;
 CGFloat const TitleHeight = 24.0f;
 CGFloat const TitleFont = 16;
+CGFloat const DefaultTextViewHeight = 200.0f;
 
 @implementation SelwynFormHandle
 

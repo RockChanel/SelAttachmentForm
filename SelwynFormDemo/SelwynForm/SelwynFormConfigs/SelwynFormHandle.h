@@ -14,6 +14,7 @@ UIKIT_EXTERN CGFloat const EdgeMarin; //cell margin
 UIKIT_EXTERN CGFloat const TitleWidth; //form title width
 UIKIT_EXTERN CGFloat const TitleHeight; //form title height
 UIKIT_EXTERN CGFloat const TitleFont; //form font size of title
+UIKIT_EXTERN CGFloat const DefaultTextViewHeight; //TextViewCellType Default TextView Height
 
 @interface SelwynFormHandle : NSObject
 

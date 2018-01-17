@@ -44,7 +44,7 @@
     
     CGSize detailSize = [SelwynFormHandle getSizeWithString:item.formDetail Font:Font(TitleFont) maxSize:CGSizeMake(ScreenWidth - TitleWidth - 2*EdgeMarin - 30, MAXFLOAT)];
     
-    return MAX(44, detailSize.height + 2*EdgeMarin);
+    return MAX(TitleHeight + 2*EdgeMarin, detailSize.height + 2*EdgeMarin);
 }
 
 
