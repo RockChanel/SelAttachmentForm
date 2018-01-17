@@ -116,7 +116,7 @@
 #pragma mark -- cell height
 + (CGFloat)cellHeightWithItem:(SelwynFormItem *)item{
     
-    CGSize detailSize = [SelwynFormHandle getSizeWithString:item.formDetail Font:Font(16) maxSize:CGSizeMake(ScreenWidth - 2*EdgeMarin - 20, MAXFLOAT)];
+    CGSize detailSize = [SelwynFormHandle getSizeWithString:item.formDetail Font:Font(TitleFont) maxSize:CGSizeMake(ScreenWidth - 2*EdgeMarin - 20, MAXFLOAT)];
     
     return MAX(200, detailSize.height + 74);
 }

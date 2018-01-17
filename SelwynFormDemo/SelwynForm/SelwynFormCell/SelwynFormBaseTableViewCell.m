@@ -8,6 +8,7 @@
 
 #import "SelwynFormBaseTableViewCell.h"
 #import "SelwynExpandableTextView.h"
+#import "SelwynFormHandle.h"
 
 @interface SelwynFormBaseTableViewCell()<UITextViewDelegate>
 
@@ -19,10 +20,10 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc]init];
-        _titleLabel.font = Font(16);
+        _titleLabel.font = Font(TitleFont);
         _titleLabel.adjustsFontSizeToFitWidth = YES;
         
-        [self addSubview:_titleLabel];
+        [self.contentView addSubview:_titleLabel];
     }
     
     return _titleLabel;
@@ -37,7 +38,7 @@
         _textView.textContainer.lineFragmentPadding = 0;
         _textView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _textView.backgroundColor = [UIColor clearColor];
-        _textView.font = Font(16);
+        _textView.font = Font(TitleFont);
         _textView.scrollEnabled = NO;
         _textView.autocorrectionType = UITextAutocorrectionTypeNo;
         _textView.showsVerticalScrollIndicator = NO;
