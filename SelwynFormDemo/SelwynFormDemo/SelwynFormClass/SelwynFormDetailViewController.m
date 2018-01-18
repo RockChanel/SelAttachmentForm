@@ -102,6 +102,12 @@ typedef void(^EditCompletion)();
         phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
         phoneNumber.required = YES;
         
+        intro.editable = YES;
+        intro.required = YES;
+        
+        address.editable = YES;
+        address.required = YES;
+        
         attachment.editable = YES;
         
         [weakSelf.formTableView reloadData];

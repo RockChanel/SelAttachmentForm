@@ -53,19 +53,6 @@
     return MAX(TitleHeight+2*EdgeMarin ,detailSize.height + 2*EdgeMarin);
 }
 
-#pragma mark -- textViewdelegate
-#pragma mark - Text View Delegate
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    // make sure the cell is at the top
-    [self.expandableTableView scrollToRowAtIndexPath:[self.expandableTableView indexPathForCell:self]
-                                    atScrollPosition:UITableViewScrollPositionTop
-                                            animated:YES];
-    
-    return YES;
-}
-
 #pragma mark -- word limit
 - (void)limitTextViewTextLength{
     
@@ -104,10 +91,11 @@
         _formInputCompletion(_inputDetail);
     }
     
-    [self.expandableTableView beginUpdates];
-    [self.expandableTableView endUpdates];
+    [UIView performWithoutAnimation:^{
+        [self.expandableTableView beginUpdates];
+        [self.expandableTableView endUpdates];
+    }];
 }
-
 
 - (void)setInputDetail:(NSString *)inputDetail
 {

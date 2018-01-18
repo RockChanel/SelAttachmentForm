@@ -48,17 +48,6 @@
     self.textView.frame = CGRectMake(EdgeMarin, CGRectGetMaxY(self.titleLabel.frame) + EdgeMarin, ScreenWidth - 2*EdgeMarin, MAX(DefaultTextViewHeight - 3*EdgeMarin - TitleHeight, newHeight - TitleHeight - 3*EdgeMarin));
 }
 
-#pragma mark - Text View Delegate
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    // make sure the cell is at the top
-    [self.expandableTableView scrollToRowAtIndexPath:[self.expandableTableView indexPathForCell:self]
-                                    atScrollPosition:UITableViewScrollPositionTop
-                                            animated:YES];
-    
-    return YES;
-}
-
 #pragma mark -- word limit
 - (void)limitTextViewTextLength{
     
@@ -97,8 +86,10 @@
         _formTextViewInputCompletion(_inputDetail);
     }
     
-    [self.expandableTableView beginUpdates];
-    [self.expandableTableView endUpdates];
+    [UIView performWithoutAnimation:^{
+        [self.expandableTableView beginUpdates];
+        [self.expandableTableView endUpdates];
+    }];
 }
 
 - (void)setInputDetail:(NSString *)inputDetail

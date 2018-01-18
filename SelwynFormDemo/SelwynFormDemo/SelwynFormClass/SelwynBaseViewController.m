@@ -44,7 +44,7 @@
     SelwynFormItem *detailType = SelwynDetailItemMake(@"编辑表单", @"", SelwynFormCellTypeNone);
     detailType.selectHandle = ^(SelwynFormItem *item) {
         
-        SelwynFormDetailViewController *formVC = [[SelwynFormDetailViewController alloc]initWithStyle:UITableViewStylePlain];
+        SelwynFormDetailViewController *formVC = [[SelwynFormDetailViewController alloc]initWithStyle:UITableViewStyleGrouped];
         formVC.title = @"编辑表单";
         [self.navigationController pushViewController:formVC animated:YES];
     };
@@ -53,7 +53,7 @@
     SelwynFormItem *attaType = SelwynDetailItemMake(@"附件表单", @"", SelwynFormCellTypeNone);
     attaType.selectHandle = ^(SelwynFormItem *item) {
         
-        SelwynFormAttaViewController *formVC = [[SelwynFormAttaViewController alloc]initWithStyle:UITableViewStylePlain];
+        SelwynFormAttaViewController *formVC = [[SelwynFormAttaViewController alloc]initWithStyle:UITableViewStyleGrouped];
         formVC.title = @"附件表单";
         [self.navigationController pushViewController:formVC animated:YES];
     };

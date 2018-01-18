@@ -41,6 +41,7 @@
         _textView.font = Font(TitleFont);
         _textView.scrollEnabled = NO;
         _textView.autocorrectionType = UITextAutocorrectionTypeNo;
+        _textView.layoutManager.allowsNonContiguousLayout = NO;
         _textView.showsVerticalScrollIndicator = NO;
         _textView.showsHorizontalScrollIndicator = NO;
         

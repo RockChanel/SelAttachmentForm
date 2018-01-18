@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SelwynBaseViewController.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -23,6 +24,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self _rootViewController];
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     [self.window makeKeyAndVisible];
     
