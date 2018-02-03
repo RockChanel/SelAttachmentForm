@@ -12,17 +12,16 @@
 
 @interface SelwynFormSelectTableViewCell : SelwynFormBaseTableViewCell
 
-/* cell Item */
+/** cell条目 */
 @property (nonatomic, strong) SelwynFormItem *formItem;
-
-#pragma mark -- cell height
+/** 动态获取cell高度 */
 + (CGFloat)cellHeightWithItem:(SelwynFormItem *)item;
 
 @end
 
 @interface UITableView (SelwynFormSelectTableViewCell)
 
-/* Designated initializer */
+/** SelwynFormSelectTableViewCell初始化 */
 - (SelwynFormSelectTableViewCell *)formSelectCellWithId:(NSString *)cellId;
 
 @end

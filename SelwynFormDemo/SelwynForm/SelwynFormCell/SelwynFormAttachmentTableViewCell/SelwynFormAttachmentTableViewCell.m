@@ -16,18 +16,23 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-#define IMAGE_MAX_SIZE_5k 5120*2880
-#define AttaWidth 81
-#define RowCount 4
+
+#define IMAGE_MAX_SIZE_5k 5120*2880     //图片压缩大小
+#define AttaWidth 81        //图片宽度
+#define RowCount 4      //每行显示图片数
 #define cell_id @"atta_collection_cell_id"
 
 @interface SelwynFormAttachmentTableViewCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TZImagePickerControllerDelegate,MWPhotoBrowserDelegate>
 
+/** 标题 */
 @property (nonatomic, strong) UILabel *titleLab;
+/** 附件图标 */
 @property (nonatomic, strong) UIImageView *iconImageView;
+/** 选择附件展示collectionView */
 @property (nonatomic, strong) UICollectionView *collectionView;
+/** addButton */
 @property (nonatomic, strong) UIButton *addButton;
-
+/** 附件 */
 @property (nonatomic, strong) NSMutableArray *images;
 
 @property (strong, nonatomic) UINavigationController *photoNavigationController;
@@ -43,10 +48,10 @@
     if (!_images) {
         _images = [[NSMutableArray alloc]init];
     }
-    
     return _images;
 }
 
+/** 重写formItem set方法 */
 - (void)setFormItem:(SelwynFormItem *)formItem
 {
     _formItem = formItem;
@@ -56,6 +61,7 @@
     self.titleLab.attributedText = formItem.formAttributedTitle;
 }
 
+/** 选择附件展示collectionView */
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
@@ -73,16 +79,14 @@
         _collectionView.scrollEnabled = NO;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        
         [_collectionView registerClass:[SelwynAttaCollectionViewCell
                                         class] forCellWithReuseIdentifier:cell_id];
-        
         [self.contentView addSubview:_collectionView];
     }
-    
     return _collectionView;
 }
 
+/** 标题 */
 - (UILabel *)titleLab
 {
     if (!_titleLab) {
@@ -90,19 +94,17 @@
         _titleLab.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:self.titleLab];
     }
-    
     return _titleLab;
 }
 
+/** 附件图标 */
 - (UIImageView *)iconImageView
 {
     if (!_iconImageView) {
-        
         _iconImageView = [[UIImageView alloc]init];
         _iconImageView.image = [UIImage imageNamed:@"ProjectInitial_Attachment"];
         [self.contentView addSubview:_iconImageView];
     }
-    
     return _iconImageView;
 }
 
@@ -125,7 +127,6 @@
     self.addButton.frame = CGRectMake(0, 0, self.frame.size.width, _formItem.defaultCellHeight);
     
     if (_formItem.images.count > 0) {
-        
         self.collectionView.hidden = NO;
         self.collectionView.frame = CGRectMake(0, _formItem.defaultCellHeight, self.frame.size.width, self.frame.size.height - _formItem.defaultCellHeight);
         [self.collectionView reloadData];
@@ -136,6 +137,7 @@
     }
 }
 
+#pragma mark -- collectionView delegate && datasource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -154,7 +156,6 @@
     cell.deleteHandle = ^{
         
         [self.images removeObjectAtIndex:indexPath.item];
-        
         [self refreshData];
     };
     
@@ -207,7 +208,6 @@
     }
     
     [self.photoBrowser setCurrentPhotoIndex:indexPath.item];
-    
     [[self superViewController:self] presentViewController:self.photoNavigationController animated:YES completion:nil];
 }
 
@@ -234,11 +234,13 @@
         switch (buttonIndex) {
             case 0:
             {
+                //拍照
                 [self takePhoto];
             }
                 break;
             case 1:
             {
+                //选取本地图片
                 [self localPhoto];
             }
                 break;
@@ -248,9 +250,11 @@
     }
 }
 
+/** 拍照 */
 - (void)takePhoto{
     
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    //校验相机权限
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
     {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -265,17 +269,14 @@
     {
         NSLog(@"无法打开照相机,请检查后重试");
     }
-    
 }
 
+/** 选取本地图片 */
 - (void)localPhoto{
     
     TZImagePickerController  *imagePickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:(_formItem.maxImageCount - self.images.count) delegate:self];
-    
     imagePickerVC.allowPickingVideo = NO;
-    
     [[self superViewController:self] presentViewController:imagePickerVC animated:YES completion:nil];
-    
     [self AuthorizationPhotoAlbum];
 }
 
@@ -283,11 +284,9 @@
 - (void)refreshData{
     
     [self.collectionView reloadData];
-    
     if (self.cellHandle) {
         self.cellHandle(self.images);
     }
-    
     [self.expandableTableView beginUpdates];
     [self.expandableTableView endUpdates];
 }
@@ -347,7 +346,7 @@
     return nil;
 }
 
-#pragma mark -- 计算cellHeight
+/** 动态获取cell高度 */
 + (CGFloat)cellHeightWithItem:(SelwynFormItem *)item
 {
     NSInteger rows = item.images.count%RowCount > 0 ? item.images.count/RowCount+1:item.images.count/RowCount;
@@ -493,6 +492,7 @@
 
 @implementation UITableView (SelwynFormAttachmentTableViewCell)
 
+/** SelwynFormAttachmentTableViewCell初始化 */
 - (SelwynFormAttachmentTableViewCell *)formAttachmentCellWithId:(NSString *)cellId
 {
     SelwynFormAttachmentTableViewCell *cell = [self dequeueReusableCellWithIdentifier:cellId];

@@ -18,12 +18,13 @@
 #import "SelwynFormAttachmentTableViewCell.h"
 
 @interface SelwynFormBaseViewController ()<UITableViewDelegate, UITableViewDataSource>
+/** 表单样式 */
 @property (nonatomic, readonly) UITableViewStyle style;
 @end
 
 @implementation SelwynFormBaseViewController
 
-#pragma mark -- form datasource
+/** 数据源 */
 - (NSMutableArray *)mutableArray
 {
     if (!_mutableArray) {
@@ -32,13 +33,16 @@
     return _mutableArray;
 }
 
+/**
+ 初始化方法
+ @param style 表单样式
+ */
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super init];
     if (self) {
         _style = style;
     }
-    
     return self;
 }
 
@@ -50,8 +54,7 @@
         [self setEdgesForExtendedLayout:UIRectEdgeNone];
     }
     
-
-    // formTableView
+    //创建formTableView
     UITableViewController *tableViewController = [[UITableViewController alloc] initWithStyle:_style];
     [self addChildViewController:tableViewController];
     [tableViewController.view setFrame:self.view.bounds];
@@ -76,7 +79,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     SelwynFormSectionItem *sectionItem = self.mutableArray[section];
-    
     return sectionItem.cellItems.count;
 }
 
@@ -87,81 +89,81 @@
     SelwynFormSectionItem *sectionItem = self.mutableArray[indexPath.section];
     SelwynFormItem *item = sectionItem.cellItems[indexPath.row];
     
+    //根据条目cellType创建不同cell
     if (item.formCellType == SelwynFormCellTypeTextViewInput) {
         
         static NSString *cell_id = @"textViewInputCell_id";
-        
         SelwynFormTextViewInputTableViewCell *cell = [tableView formTextViewInputCellWithId:cell_id];
         cell.formItem = item;
         cell.formTextViewInputCompletion = ^(NSString *text) {
           
             [weakSelf updateFormTextViewInputWithText:text indexPath:indexPath];
         };
-        
         return cell;
         
     }else if (item.formCellType == SelwynFormCellTypeSelect){
         
         static NSString *cell_id = @"selectCell_id";
-        
         SelwynFormSelectTableViewCell *cell = [tableView formSelectCellWithId:cell_id];
         cell.formItem = item;
-
         return cell;
     }
     else if (item.formCellType == SelwynFormCellTypeAttachment){
         
         static NSString *cell_id = @"attachmentCell_id";
-        
         SelwynFormAttachmentTableViewCell *cell = [tableView formAttachmentCellWithId:cell_id];
         cell.formItem = item;
-        
         cell.cellHandle = ^(NSArray *images) {
-            
             [weakSelf updatedAttachments:images indexPath:indexPath];
         };
-        
         return cell;
-        
     }
     else
     {
         static NSString *cell_id = @"inputCell_id";
-        
         SelwynFormInputTableViewCell *cell = [tableView formInputCellWithId:cell_id];
         cell.formItem = item;
         cell.formInputCompletion = ^(NSString *text) {
-            
             [weakSelf updateFormInputWithText:text indexPath:indexPath];
         };
-        
         return cell;
     }
 }
 
-#pragma mark -- 更新附件
+
+/**
+ 更新附件
+ @param images 图片数组
+ @param indexPath indexPath
+ */
 - (void)updatedAttachments:(NSArray *)images indexPath:(NSIndexPath *)indexPath{
     
     SelwynFormSectionItem *sectionModel = self.mutableArray[indexPath.section];
-    
     SelwynFormItem *item = sectionModel.cellItems[indexPath.row];
-    
     item.images = images;
 }
 
+/**
+ 更新InputType输入内容
+ @param text 输入内容
+ @param indexPath indexPath
+ */
 - (void)updateFormInputWithText:(NSString *)text indexPath:(NSIndexPath *)indexPath{
     
     SelwynFormSectionItem *sectionItem = self.mutableArray[indexPath.section];
     SelwynFormItem *item = sectionItem.cellItems[indexPath.row];
-    
     item.formDetail = text;
 }
 
+/**
+ 更新TextViewType输入内容
+ @param text 输入内容
+ @param indexPath indexPath
+ */
 - (void)updateFormTextViewInputWithText:(NSString *)text indexPath:(NSIndexPath *)indexPath{
     
     SelwynFormSectionItem *sectionItem = self.mutableArray[indexPath.section];
     SelwynFormItem *item = sectionItem.cellItems[indexPath.row];
-    
     item.formDetail = text;
 }
 
@@ -170,14 +172,15 @@
     SelwynFormSectionItem *sectionItem = self.mutableArray[indexPath.section];
     SelwynFormItem *item = sectionItem.cellItems[indexPath.row];
     
+    /** 动态计算cellHeight */
     if (item.formCellType == SelwynFormCellTypeTextViewInput) {
         return [SelwynFormTextViewInputTableViewCell cellHeightWithItem:item];
-    }else if (item.formCellType == SelwynFormCellTypeSelect){
+    }
+    else if (item.formCellType == SelwynFormCellTypeSelect){
         return [SelwynFormSelectTableViewCell cellHeightWithItem:item];
     }
     else if (item.formCellType == SelwynFormCellTypeAttachment){
         return [SelwynFormAttachmentTableViewCell cellHeightWithItem:item];
-        
     }
     return [SelwynFormInputTableViewCell cellHeightWithItem:item];
 }
@@ -201,10 +204,8 @@
         titleLabel.adjustsFontSizeToFitWidth = YES;
         titleLabel.text = sectionItem.headerTitle;
         titleLabel.textColor = sectionItem.headerTitleColor;
-        
         [header addSubview:titleLabel];
     }
-    
     return header;
 }
 
@@ -217,9 +218,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     SelwynFormSectionItem *sectionItem = self.mutableArray[section];
-    
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, sectionItem.footerHeight)];
-    
     footer.backgroundColor = sectionItem.footerColor;
     
     if (sectionItem.footerTitle) {
@@ -228,10 +227,8 @@
         titleLabel.adjustsFontSizeToFitWidth = YES;
         titleLabel.text = sectionItem.footerTitle;
         titleLabel.textColor = sectionItem.footerTitleColor;
-        
         [footer addSubview:titleLabel];
     }
-    
     return footer;
 }
 
@@ -251,7 +248,7 @@
     }
 }
 
-#pragma mark -- setCommitButton
+/** 添加提交按钮 */
 - (void)_setCommitItem{
     
     UIButton *commitButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -265,33 +262,23 @@
     self.navigationItem.rightBarButtonItem = commitItem;
 }
 
-#pragma mark -- commitAction
+/** 提交按钮点击事件 校验数据 */ 
 - (void)commit{
-    
     for (int sec = 0; sec < self.mutableArray.count; sec++) {
-        
         SelwynFormSectionItem *sectionItem = self.mutableArray[sec];
         
         for (int row = 0; row < sectionItem.cellItems.count; row++) {
             
             SelwynFormItem *rowItem = sectionItem.cellItems[row];
-            
             SelwynFormItem *checkItem = [SelwynFormHandle checkContentWithItem:rowItem];
-            
             if (![checkItem.formError isEqualToString:@""]) {
-                
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:checkItem.formError message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                
                 [alert show];
-                
                 return;
             }
         }
     }
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

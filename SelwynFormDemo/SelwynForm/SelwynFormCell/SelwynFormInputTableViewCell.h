@@ -14,20 +14,18 @@ typedef void(^FormInputCompletion)(NSString *text);
 
 @interface SelwynFormInputTableViewCell : SelwynFormBaseTableViewCell
 
-/* cell Item */
+/** cell条目 */
 @property (nonatomic, strong) SelwynFormItem *formItem;
-
-/* textview content block */
+/** 输入内容回调 */
 @property (nonatomic, copy) FormInputCompletion formInputCompletion;
-
-/* return height of cell */
+/** 动态获取cell高度 */
 + (CGFloat)cellHeightWithItem:(SelwynFormItem *)item;
 
 @end
 
 @interface UITableView (SelwynFormInputTableViewCell)
 
-/* Designated initializer */
+/** SelwynFormInputTableViewCell初始化 */
 - (SelwynFormInputTableViewCell *)formInputCellWithId:(NSString *)cellId;
 
 @end

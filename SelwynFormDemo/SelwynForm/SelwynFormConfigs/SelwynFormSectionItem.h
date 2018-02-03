@@ -13,31 +13,23 @@
 
 @interface SelwynFormSectionItem : NSObject
 
-/* sectionHeaderTitle */
+/** header 标题 */
 @property (nonatomic, copy) NSString *headerTitle;
-
-/* sectionFooterTitle */
+/** footer 标题 */
 @property (nonatomic, copy) NSString *footerTitle;
-
-/* sectionHeaderHeight */
+/** header 高度 */
 @property (nonatomic, assign) CGFloat headerHeight;
-
-/* sectionFooterHeight */
+/** footer 高度 */
 @property (nonatomic, assign) CGFloat footerHeight;
-
-/* headerTitleColor default is black */
+/** header 标题颜色 缺省黑色 */
 @property (nonatomic, strong) UIColor *headerTitleColor;
-
-/* footerTitleColor default is black */
+/** footer 标题颜色 缺省黑色 */
 @property (nonatomic, strong) UIColor *footerTitleColor;
-
-/* sectionHeaderColor  default is clear */
+/** header 颜色 缺省透明 */
 @property (nonatomic, strong) UIColor *headerColor;
-
-/* sectionFooterColor default is clear */
+/** footer 颜色 缺省透明 */
 @property (nonatomic, strong) UIColor *footerColor;
-
-/* sectionCellItems */
+/** section 下单元格 */
 @property (nonatomic, strong) NSArray *cellItems;
 
 @end

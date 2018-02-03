@@ -20,15 +20,13 @@
 
 @implementation SelwynAttaCollectionViewCell
 
+/** 初始化 */
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    
     if (self) {
-        
         [self _setUI];
     }
-    
     return self;
 }
 
@@ -54,13 +52,16 @@
     [self.contentView addSubview:_deleteButton];
 }
 
+/** 图片删除点击事件 */
 - (void)deleteAction{
     
+    /** 图片删除回调 */
     if (_deleteHandle) {
         _deleteHandle();
     }
 }
 
+/** 重写editingEnable set 方法 */
 - (void)setEditingEnable:(BOOL)editingEnable
 {
     _editingEnable = editingEnable;
@@ -69,6 +70,7 @@
     _deleteButton.hidden = !_editingEnable;
 }
 
+/** 重写editingEnable set 方法 显示图片 可在此配置SDWebImage 加载图片 以及设置图片缺省图*/
 - (void)setImage:(id)image
 {
     _image = image;

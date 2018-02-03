@@ -12,13 +12,11 @@
 
 @interface SelwynFormBaseTableViewCell : UITableViewCell
 
-/* expandable textview */
+/** expandable textview */
 @property (nonatomic, strong) SelwynExpandableTextView *textView;
-
-/* titlelabel */
+/** 标题 */
 @property (nonatomic, strong) UILabel *titleLabel;
-
-/* super tableview of cell */
+/** 所在的tableView */
 @property (nonatomic, weak) UITableView *expandableTableView;
 
 

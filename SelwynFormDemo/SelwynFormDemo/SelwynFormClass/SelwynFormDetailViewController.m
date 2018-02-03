@@ -110,6 +110,9 @@ typedef void(^EditCompletion)();
         
         attachment.editable = YES;
         
+        NSLog(@"%@",name.formDetail);
+        NSLog(@"%@",attachment.images);
+        
         [weakSelf.formTableView reloadData];
     };
 }

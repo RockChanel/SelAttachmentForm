@@ -14,20 +14,18 @@ typedef void(^AttachmentCellHandle)(NSArray *images);
 
 @interface SelwynFormAttachmentTableViewCell : SelwynFormBaseTableViewCell
 
-/* cell Item */
+/** cell条目 */
 @property (nonatomic, strong) SelwynFormItem *formItem;
-
 /* 选择照片block */
 @property (nonatomic, copy) AttachmentCellHandle cellHandle;
-
-#pragma mark -- cell height
+/** 动态获取cell高度 */
 + (CGFloat)cellHeightWithItem:(SelwynFormItem *)item;
 
 @end
 
 @interface UITableView (SelwynFormAttachmentTableViewCell)
 
-/* Designated initializer */
+/** SelwynFormAttachmentTableViewCell初始化 */
 - (SelwynFormAttachmentTableViewCell *)formAttachmentCellWithId:(NSString *)cellId;
 
 @end

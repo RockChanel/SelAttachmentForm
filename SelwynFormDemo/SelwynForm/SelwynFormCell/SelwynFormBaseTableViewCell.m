@@ -16,6 +16,7 @@
 
 @implementation SelwynFormBaseTableViewCell
 
+/** 创建titleLabel */
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
@@ -29,17 +30,21 @@
     return _titleLabel;
 }
 
+/** 创建ExpandableTextView */
 - (SelwynExpandableTextView *)textView
 {
     if (!_textView) {
         _textView = [[SelwynExpandableTextView alloc] init];
         _textView.delegate = self;
-        _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);//set margin
+         //设置textView内边距为0
+        _textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _textView.textContainer.lineFragmentPadding = 0;
         _textView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _textView.backgroundColor = [UIColor clearColor];
         _textView.font = Font(TitleFont);
+        //关闭textView滚动
         _textView.scrollEnabled = NO;
+        //关闭自动校验
         _textView.autocorrectionType = UITextAutocorrectionTypeNo;
         _textView.layoutManager.allowsNonContiguousLayout = NO;
         _textView.showsVerticalScrollIndicator = NO;

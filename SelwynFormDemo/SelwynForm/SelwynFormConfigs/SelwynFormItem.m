@@ -11,25 +11,26 @@
 
 @implementation SelwynFormItem
 
+/** 初始化条目 */
 - (instancetype)init
 {
     self = [super init];
-    
     if (self) {
     
         _formDetail = @"";
+        //单元格缺省高度
         _defaultCellHeight = 44;
+        //附件缺省最大数量
         _maxImageCount = 4;
     }
     
     return self;
 }
 
-#pragma mark -- setFormCellType  set placeholder
+/** 重写formCellType Set方法 设置placeholder */
 - (void)setFormCellType:(SelwynFormCellType)formCellType
 {
     _formCellType = formCellType;
-    
     switch (formCellType) {
         case SelwynFormCellTypeNone:
         {
@@ -56,7 +57,7 @@
     }
 }
 
-#pragma mark -- isDetail
+/** 重写isDetail Set方法 若详情页面则不展示placeholder */
 - (void)setIsDetail:(BOOL)isDetail{
     _isDetail = isDetail;
     if (_isDetail) {
@@ -64,7 +65,7 @@
     }
 }
 
-#pragma mark -- attributedPlaceholder
+/** 重写placeholder Set方法 */
 - (void)setPlaceholder:(NSString *)placeholder
 {
     _placeholder = placeholder;
@@ -74,7 +75,7 @@
     _attributedPlaceholder = attributedPlaceholder;
 }
 
-#pragma mark - add * before heading if required 
+/** 重写required Set方法 若YES则标题前加*标识符 */
 - (void)setRequired:(BOOL)required
 {
     _required = required;

@@ -8,22 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-/* submitblock */
+/** 提交操作回调 */
 typedef void(^FormCompletion)();
 
 @interface SelwynFormBaseViewController : UIViewController
 
-/*baseTableView*/
+/** baseTableView */
 @property (nonatomic, strong) UITableView *formTableView;
-
-/* datasource */
+/** tableView数据源 */
 @property (nonatomic, strong) NSMutableArray *mutableArray;
 
-
-/* Designated initializer */
+/**
+ 初始化方法
+ @param style 表单样式
+ */
 - (instancetype)initWithStyle:(UITableViewStyle)style;
 
-#pragma mark -- setCommitButton
+/** 添加提交按钮 */
 - (void)_setCommitItem;
 
 @end
