@@ -40,8 +40,7 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
     [datas addObject:name];
     
     SelwynFormItem *phoneNumber = SelwynItemMake(@"手机号", @"", SelwynFormCellTypeInput, UIKeyboardTypeNumberPad, YES, YES);
-    phoneNumber.maxInputLength = 11;
-    
+    phoneNumber.maxInputLength = 11;    //添加字数限制
     [datas addObject:phoneNumber];
     
     SelwynFormItem *gender = SelwynItemMake(@"性别", @"", SelwynFormCellTypeSelect, UIKeyboardTypeDefault, NO, YES);
@@ -52,7 +51,6 @@ typedef void(^GenderSelectCompletion)(NSInteger index);
     [datas addObject:gender];
     
     SelwynFormItem *intro = SelwynItemMake(@"个人简介", @"", SelwynFormCellTypeTextViewInput, UIKeyboardTypeDefault, YES, NO);
-    
     [datas addObject:intro];
     
     SelwynFormSectionItem *sectionItem = [[SelwynFormSectionItem alloc]init];

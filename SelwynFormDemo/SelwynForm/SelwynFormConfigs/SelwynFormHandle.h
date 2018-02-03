@@ -53,15 +53,31 @@ UIKIT_EXTERN CGFloat const DefaultTextViewHeight;
 
 @end
 
+/**
+ 快捷创建新增表单条目
 
-/** 快捷创建表单条目 */ 
+ @param formTitle 标题
+ @param formDetail 详情
+ @param cellType cell类型
+ @param keyboardType 键盘类型
+ @param editable 是否可编辑
+ @param required 是否必填（必选）
+ @return 表单条目
+ */
 NS_INLINE SelwynFormItem *SelwynItemMake(NSString *formTitle, NSString *formDetail, SelwynFormCellType cellType, UIKeyboardType keyboardType, BOOL editable, BOOL required){
-    
     return [SelwynFormHandle itemWithFormTitle:formTitle formDetail:formDetail cellType:cellType keyboardType:keyboardType editable:editable required:required];
 }
 
+
+/**
+ 快捷创建详情表单条目
+ 
+ @param formTitle 标题
+ @param formDetail 详情
+ @param cellType cell类型
+ @return 表单条目
+ */
 NS_INLINE SelwynFormItem *SelwynDetailItemMake(NSString *formTitle, NSString *formDetail, SelwynFormCellType cellType){
-    
     return [SelwynFormHandle detailItemWithFormTitle:formTitle formDetail:formDetail cellType:cellType];
 }
 

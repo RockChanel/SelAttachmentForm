@@ -262,7 +262,7 @@
     self.navigationItem.rightBarButtonItem = commitItem;
 }
 
-/** 提交按钮点击事件 校验数据 */ 
+/** 校验数据 */ 
 - (void)commit{
     for (int sec = 0; sec < self.mutableArray.count; sec++) {
         SelwynFormSectionItem *sectionItem = self.mutableArray[sec];

@@ -78,21 +78,17 @@ CGFloat const DefaultTextViewHeight = 200.0f;
 + (SelwynFormItem *)checkContentWithItem:(SelwynFormItem *)item{
     
     item.formError = @"";
-    
     if (item.required) {
-        
         if (!item.formDetail || [item.formDetail isEqualToString:@""]) {
          
             if (item.formCellType == SelwynFormCellTypeInput || item.formCellType == SelwynFormCellTypeTextViewInput) {
                 item.formError = [NSString stringWithFormat:@"请输入%@",item.formTitle];
                 
             }else if (item.formCellType == SelwynFormCellTypeSelect){
-                
                 item.formError = [NSString stringWithFormat:@"请选择%@",item.formTitle];
             }
         }
     }
-    
     return item;
 }
 

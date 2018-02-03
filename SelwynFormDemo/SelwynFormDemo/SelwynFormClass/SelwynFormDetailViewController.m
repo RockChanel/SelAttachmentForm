@@ -91,11 +91,12 @@ typedef void(^EditCompletion)();
     
     __weak typeof (self) weakSelf = self;
     
+    //编辑按钮点击事件
     self.editCompletion = ^(){
         [weakSelf.editBtn setTitle:@"完成" forState:UIControlStateNormal];
         
-        name.editable = YES;
-        name.required = YES;
+        name.editable = YES;  //重置可编辑属性
+        name.required = YES;    //重置可选必选
         
         phoneNumber.editable = YES;
         phoneNumber.maxInputLength = 11;

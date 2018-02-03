@@ -31,12 +31,10 @@
     [datas addObject:name];
     
     SelwynFormItem *phoneNumber = SelwynItemMake(@"手机号", @"", SelwynFormCellTypeInput, UIKeyboardTypeNumberPad, YES, YES);
-    phoneNumber.maxInputLength = 11;
-    
+    phoneNumber.maxInputLength = 11;  //字数限制
     [datas addObject:phoneNumber];
     
     SelwynFormItem *attachment = SelwynItemMake(@"附件", @"", SelwynFormCellTypeAttachment, UIKeyboardTypeDefault, YES, NO);
-    
     [datas addObject:attachment];
     
     SelwynFormSectionItem *sectionItem = [[SelwynFormSectionItem alloc]init];
