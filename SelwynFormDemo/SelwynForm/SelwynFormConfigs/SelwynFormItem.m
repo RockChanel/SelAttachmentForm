@@ -11,16 +11,13 @@
 
 @implementation SelwynFormItem
 
-/** 初始化条目 */
 - (instancetype)init
 {
     self = [super init];
     if (self) {
     
         _formDetail = @"";
-        //单元格缺省高度
         _defaultCellHeight = 44;
-        //附件缺省最大数量
         _maxImageCount = 4;
     }
     
@@ -31,30 +28,30 @@
 - (void)setFormCellType:(SelwynFormCellType)formCellType
 {
     _formCellType = formCellType;
+    
+    NSString *tempPlaceholder = @"";
     switch (formCellType) {
         case SelwynFormCellTypeNone:
-        {
-            self.placeholder = @"";
-        }
             break;
         case SelwynFormCellTypeInput:
         {
-            self.placeholder = @"请输入";
+            tempPlaceholder = @"请输入";
         }
             break;
         case SelwynFormCellTypeSelect:
         {
-            self.placeholder = @"请选择";
+            tempPlaceholder = @"请选择";
         }
             break;
         case SelwynFormCellTypeTextViewInput:
         {
-            self.placeholder = @"请输入";
+            tempPlaceholder = @"请输入";
         }
             break;
         default:
             break;
     }
+    self.placeholder = tempPlaceholder;
 }
 
 /** 重写isDetail Set方法 若详情页面则不展示placeholder */
@@ -81,7 +78,6 @@
     _required = required;
     
     NSString *title = self.formTitle;
-    
     if (required) {
         title = [NSString stringWithFormat:@"*%@",title];
     }

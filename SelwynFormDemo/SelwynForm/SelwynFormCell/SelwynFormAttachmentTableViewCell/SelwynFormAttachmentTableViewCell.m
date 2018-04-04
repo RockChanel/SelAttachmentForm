@@ -407,25 +407,12 @@
 //授权相机
 - (void)AuthorzationCamera
 {
-    
-    //1 判断是否有访问权限
+    // 判断是否有访问权限
     AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    
-    if (status == AVAuthorizationStatusAuthorized) {
+    if (status == AVAuthorizationStatusDenied) {
         
-        
-    } else if (status == AVAuthorizationStatusDenied) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"请在\n设置-筑库\n中开启照相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil, nil];
-        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"请开启照相机权限" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil, nil];
         [alertView show];
-        
-        return;
-        
-        AVAuthorizationStatus status1 = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        if (status1 == AVAuthorizationStatusAuthorized) {
-            
-        }
     }
     else if (status == AVAuthorizationStatusNotDetermined)
     {
@@ -435,14 +422,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                    
-                    if (granted) {
-                        
-                    } else
-                    {
-                        
-                        NSLog(@"请在\n设置-筑库\n中开启照相机");
-                        return ;
+                    if (!granted) {
+                         NSLog(@"请开启照相机权限");
                     }
                 }];
             });
@@ -455,25 +436,12 @@
  */
 - (void)AuthorizationPhotoAlbum
 {
-    
     ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-    
-    if (author == ALAuthorizationStatusAuthorized) {
+    if (author == ALAuthorizationStatusDenied) {
         
-        
-    } else if (author == ALAuthorizationStatusDenied) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"请在\n设置-筑库\n中开启照片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"请开启照片权限" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil, nil];
         
         [alertView show];
-        
-        return;
-        
-    }
-    else if (author == ALAuthorizationStatusNotDetermined)
-    {
-        
-        
     }
 }
 

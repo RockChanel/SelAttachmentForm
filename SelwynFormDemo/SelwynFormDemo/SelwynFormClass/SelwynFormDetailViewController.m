@@ -13,7 +13,7 @@
 
 typedef void(^EditCompletion)();
 
-@interface SelwynFormDetailViewController ()
+@interface SelwynFormDetailViewController ()<UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSArray *genders;
 @property (nonatomic, strong) UIButton *editBtn;
@@ -55,7 +55,7 @@ typedef void(^EditCompletion)();
     SelwynFormItem *phoneNumber = SelwynDetailItemMake(@"手机号", @"18511111111", SelwynFormCellTypeInput);
     [datas addObject:phoneNumber];
     
-    SelwynFormItem *gender = SelwynDetailItemMake(@"性别", @"男", SelwynFormCellTypeSelect);
+    SelwynFormItem *gender = SelwynDetailItemMake(@"性别", @"男", SelwynFormCellTypeInput);
     [datas addObject:gender];
     
     SelwynFormItem *intro = SelwynDetailItemMake(@"个人简介", @"小小程序员", SelwynFormCellTypeTextViewInput);
@@ -102,6 +102,8 @@ typedef void(^EditCompletion)();
         phoneNumber.maxInputLength = 11;
         phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
         phoneNumber.required = YES;
+        
+        gender.formCellType = SelwynFormCellTypeSelect;
         
         intro.editable = YES;
         intro.required = YES;

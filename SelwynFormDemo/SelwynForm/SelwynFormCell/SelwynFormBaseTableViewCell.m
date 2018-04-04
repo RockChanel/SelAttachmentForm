@@ -26,7 +26,6 @@
         
         [self.contentView addSubview:_titleLabel];
     }
-    
     return _titleLabel;
 }
 
@@ -49,10 +48,8 @@
         _textView.layoutManager.allowsNonContiguousLayout = NO;
         _textView.showsVerticalScrollIndicator = NO;
         _textView.showsHorizontalScrollIndicator = NO;
-        
         [self.contentView addSubview:_textView];
     }
-    
     return _textView;
 }
 
