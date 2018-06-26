@@ -5,6 +5,6 @@
 
 > 详细说明戳这里：https://www.jianshu.com/p/554c6c4c42d2
 
-![image](https://github.com/RockChanel/SWGIF/blob/master/SelAttachmentForm.gif)
+![image](https://github.com/RockChanel/SWGIF/blob/master/SelAttachmentForm/SelAttachmentForm.gif)
 
 
